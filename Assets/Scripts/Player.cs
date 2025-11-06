@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public Bullet bullet;
     public GameObject bulletSpawn;
 
+    public int health;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        health = 10;
     }
 
     // Update is called once per frame
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
         else if (angle > 90 || angle < -90)
         {
             arm.transform.localScale = new Vector3(1, -1, 1);
-            Debug.Log(angle);
+            //Debug.Log(angle);
         }
     }
 
