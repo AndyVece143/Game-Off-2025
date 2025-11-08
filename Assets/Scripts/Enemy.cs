@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Method that rotates the arm in relation to the player
     private void ArmRotation()
     {
         if (engagingPlayer)
@@ -78,6 +79,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Method that determines the distance between the enemy and player
     private void PlayerDistance()
     {
         float distance = Vector2.Distance(transform.position, player.transform.position);
@@ -93,6 +95,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Method that adds a cooldown between shooting
     private void ShootTimer()
     {
         shootTimer -= Time.deltaTime;
@@ -103,17 +106,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //Method that shoots
     private void Shoot()
     {
         EnemyBullet newBullet = Instantiate(bullet, bulletSpawn.transform.position, arm.transform.rotation);
     }
 
+    //All trigger collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "bullet")
+        if (collision.tag == "bullet" || collision.tag == "wavebeam")
         {
+            int damage = collision.gameObject.GetComponent<Bullet>().damage;
             Destroy(collision.gameObject);
-            health--;
+            health -= damage;
         }
     }
 }

@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBullet
   speed: 8
   timer: 2
+  damage: 1
 --- !u!50 &5364706267382356699
 Rigidbody2D:
   serializedVersion: 5
