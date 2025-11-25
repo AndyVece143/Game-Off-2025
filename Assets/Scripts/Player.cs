@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     public Vector2 knockbackDirection;
     [SerializeField] float knockbackSpeed;
 
+    public bool isTalking;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -58,7 +60,6 @@ public class Player : MonoBehaviour
     //Method for all movement related code
     private void Movement()
     {
-        
         //Dodge Roll cooldown
         if (cooldownTimer > 0)
         {
@@ -98,8 +99,16 @@ public class Player : MonoBehaviour
             }
         }
 
+        //Talking
+        if (isTalking)
+        {
+            gun.GetComponent<SpriteRenderer>().enabled = false;
+            anim.SetBool("talk", true);
+        }
+
         else
         {
+            anim.SetBool("talk", false);
             gun.GetComponent<SpriteRenderer>().enabled = true;
             //Body movement
             float horizontalInput = Input.GetAxis("Horizontal");
@@ -167,7 +176,7 @@ public class Player : MonoBehaviour
     private void ButtonPresses()
     {
         //Shooting Input
-        if (Input.GetMouseButtonDown(0) && !isDodging)
+        if (Input.GetMouseButtonDown(0) && !isDodging && !isTalking)
         {
             if (isBulletWave == false)
             {
