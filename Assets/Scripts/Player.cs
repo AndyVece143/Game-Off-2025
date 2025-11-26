@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
         //Talking
         if (isTalking)
         {
+            body.linearVelocity = Vector3.zero;
             gun.GetComponent<SpriteRenderer>().enabled = false;
             anim.SetBool("talk", true);
         }
