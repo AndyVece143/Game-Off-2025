@@ -11,5 +11,10 @@ public class PlayerCollision : MonoBehaviour
             GetComponentInParent<Player>().StartKnockback(collision.gameObject.transform.right);
             Destroy(collision.gameObject);
         }
+        if (collision.tag == "powerup")
+        {
+            GetComponentInParent<Player>().isBulletWave = true;
+            GetComponentInParent<Player>().bulletTimer = 10;
+        }
     }
 }

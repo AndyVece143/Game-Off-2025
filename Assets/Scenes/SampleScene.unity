@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 13790005}
   - component: {fileID: 13790007}
   - component: {fileID: 13790006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4718,6 +4718,7 @@ MonoBehaviour:
   health: 3
   isDodging: 0
   anim: {fileID: 0}
+  gunAnim: {fileID: 0}
   gun: {fileID: 0}
   knockbackTimer: 0
   knockbackDirection: {x: 0, y: 0}
@@ -53756,7 +53757,7 @@ Transform:
   m_GameObject: {fileID: 285364845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.21, y: 1.3, z: 0}
+  m_LocalPosition: {x: 8.74, y: -1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53866,7 +53867,7 @@ GameObject:
   - component: {fileID: 482396918}
   - component: {fileID: 482396917}
   - component: {fileID: 482396916}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collision-Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55241,7 +55242,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 2.67, y: -0.57, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55475,6 +55476,13 @@ MonoBehaviour:
   shootTimer: 3
   player: {fileID: 0}
   healthText: {fileID: 1807987831}
+  anim: {fileID: 0}
+  gun: {fileID: 0}
+  knockbackTimer: 0
+  knockbackDirection: {x: 0, y: 0}
+  knockbackSpeed: 0
+  aiPath: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!61 &640721477
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55615,7 +55623,7 @@ Transform:
   m_GameObject: {fileID: 640721475}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.18, y: 1.83, z: 0}
+  m_LocalPosition: {x: -2.34, y: -1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75892,6 +75900,93 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1147052981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1147052983}
+  - component: {fileID: 1147052982}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1147052982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147052981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::AstarPath
+  version: 1
+  data:
+    dataString: UEsDBBQAAAgIAACYn+vpGImLWQIAABEFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk0HJzQkvbUOIT2QMKGdXHwR1hprkCWPPvhIhv/eXdnGDp2eEO+93X27WvmDSe1qyL2xcyvFwghg30eMzuzLqCef4MA3Rq/kO3SaNyl8SSIeNa/cS4N4QmHOVOCtzH/ojSLxGMGgZWFsNRMbSI3zDuGCKwdIWeMpWiP0MWIH/Lm6p5Ajnq6ndHrH0/14dMJjDtqD7aWdsJM1qqBzxasaBFnuxXedetrINDbTKsh4bpSSrnXC/LGOnaa8dgH7QIGQHDuL5UlfgtyUnlwOg1+KwoFvLVl+fJAWB9RkZT9NM7WKu23ja8dVoDq3k2ipybn4h75KIl1YUz11ZZMxlfClzLev/Jhz5wdTHcIPn30Hvedqy9cK3krQz2ZuTdACSW8DhQYH1w/933NnaQn5tscbqxdgqP9/N9TDKTZ/SJWs1kR9nTTASpk47njzYPFifqHhuBeuTYEoufjj4DffDBeoJR6ldR6ptktN9tYmWJKyWZwZdRN8aqyGCLema9Bc+eMS0/jLG7zgBmUvmEdOT6Ut3nLdC7gIiXCvH48vqKXZny/LlWa/AFe+BK+kht40Ec84p9Ro3SzYcCZd2CrYgueDsE2Q4vNqsako+GQ6vSkmCV+LZHqVryfJt7vkTqxvxsWtuGdx96TGPrlaNkbb8eCt6T65xj3rviCjueV1XHZh+X4u3yszGLnUhVnlFkC/NBnOxsFiEXyUYiYkDmgF3ksd75t9ZEyZfAsiOyfKYqezg7c867NkrJY74wnJWBo/GRkj+LzLSws7CXsq3iU7sdNfUEsDBBQAAAgIAACYn+uGVXHNbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSeUpaoom5uXGaiWFiUoqhuW5ykomhqYWhRUqSsUGaWYqlUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACYn+vpGImLWQIAABEFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACYn+uGVXHNbQAAAHgAAAAJACQAAAAAAAAAAAAAAKYCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAXgMAAAAA
+    upgradeData: 
+    file_cachedStartup: {fileID: 0}
+    data_cachedStartup: 
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 0
+  unwalkableNodeDebugSize: 0.3
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
+    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _AreaColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+  tagNames: []
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 1
+  maxFrameTime: 1
+  batchGraphUpdates: 0
+  graphUpdateBatchingInterval: 0.2
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 1
+  showGraphs: 1
+--- !u!4 &1147052983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147052981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.66554, y: -4.99124, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177051005
 GameObject:
   m_ObjectHideFlags: 0
@@ -76295,6 +76390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1744380388}
   - component: {fileID: 1744380389}
+  - component: {fileID: 1744380390}
   m_Layer: 0
   m_Name: gun_0
   m_TagString: Untagged
@@ -76311,7 +76407,7 @@ Transform:
   m_GameObject: {fileID: 1744380387}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.358, y: 0.134, z: 0}
+  m_LocalPosition: {x: -0.35799995, y: 0.134, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76376,6 +76472,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1744380390
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744380387}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65ff5c157ed8301478d8d3af69ff7811, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1778040963
 GameObject:
   m_ObjectHideFlags: 0
@@ -79314,9 +79432,11 @@ MonoBehaviour:
   isTalking: 0
   textIndicator: {fileID: 259386394}
   text1:
-  - Holy crap, Andy made yuri again. At least one of the girls isn't dead this time.
-  - I bet @lesbianfeverdream on Instagram, also known as Ky, would love this.
-  - Man... I love yuri.
+  - Dude this game needs to be done in 4 days, why isn't it done yet?
+  - And it doesn't even have a title yet. Oh my god!
+  - .........................................
+  - So... who is excited for the Fortnite event on Saturday? Giant Homer and Miku
+    will be there.
   dialogue: {fileID: 5854057195948146761, guid: 6e675282392a1f948ae52f4dc18bb358, type: 3}
 --- !u!95 &1885260478
 Animator:
@@ -79407,7 +79527,7 @@ Transform:
   m_GameObject: {fileID: 1885260476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.15, y: -1.74, z: 0}
+  m_LocalPosition: {x: 5.67, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -79553,7 +79673,7 @@ GameObject:
   - component: {fileID: 1978205448}
   - component: {fileID: 1978205447}
   - component: {fileID: 1978205450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103952,13 +104072,14 @@ MonoBehaviour:
   speed: 3
   arm: {fileID: 1944106562}
   bullet: {fileID: 5445454367179207416, guid: f6d0f0d39a27e324983a4a999af14514, type: 3}
-  waveBeam: {fileID: 7576872250770992391, guid: e18c604e15d3dbc4aa10ad1148a1b114, type: 3}
+  waveBeam: {fileID: 8755680135074800421, guid: e18c604e15d3dbc4aa10ad1148a1b114, type: 3}
   bulletSpawn: {fileID: 1807190602}
   bulletTimer: 0
   isBulletWave: 0
   health: 3
   isDodging: 0
   anim: {fileID: 0}
+  gunAnim: {fileID: 1744380390}
   gun: {fileID: 1744380387}
   knockbackTimer: 0
   knockbackDirection: {x: 0, y: 0}
@@ -104124,7 +104245,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 9b9fb2297da39d143b7639654df79424, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -104150,3 +104271,4 @@ SceneRoots:
   - {fileID: 2068826537}
   - {fileID: 1885260480}
   - {fileID: 1453417539}
+  - {fileID: 1147052983}

@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private float cooldownTimer;
 
     public Animator anim;
+    public Animator gunAnim;
 
     private float angle;
 
@@ -83,7 +84,7 @@ public class Player : MonoBehaviour
         }
 
         //Knockback
-        if (inKnockback)
+        else if (inKnockback)
         {
             gun.GetComponent<SpriteRenderer>().enabled = false;
             knockbackTimer -= Time.deltaTime;
@@ -100,7 +101,7 @@ public class Player : MonoBehaviour
         }
 
         //Talking
-        if (isTalking)
+        else if (isTalking)
         {
             body.linearVelocity = Vector3.zero;
             gun.GetComponent<SpriteRenderer>().enabled = false;
@@ -248,6 +249,7 @@ public class Player : MonoBehaviour
     {
         if (isBulletWave)
         {
+            gunAnim.SetBool("wave", true);
             bulletTimer -= Time.deltaTime;
             if (bulletTimer <= 0)
             {
@@ -256,6 +258,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            gunAnim.SetBool("wave", false);
             bulletTimer = 0;
         }
     }
