@@ -1,4 +1,5 @@
 using Pathfinding;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -14,6 +15,9 @@ public class Enemy : MonoBehaviour
 
     public EnemyBullet bullet;
     public GameObject bulletSpawn;
+    public EnemyBullet waveBeam;
+    public bool isBulletWave;
+    public Animator gunAnim;
 
     public float shootTimer;
 
@@ -37,6 +41,9 @@ public class Enemy : MonoBehaviour
 
     public AIDestinationSetter destination;
 
+    private bool isDead;
+    public BoxCollider2D collision;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -49,6 +56,7 @@ public class Enemy : MonoBehaviour
     {
         player = Player.FindAnyObjectByType<Player>();
         destination.target = player.transform;
+        GunLook();
     }
 
     // Update is called once per frame
@@ -64,45 +72,49 @@ public class Enemy : MonoBehaviour
 
     private void Movement()
     {
-        if (health <= 0)
+        if (!isDead)
         {
-            Destroy(gameObject);
-        }
-
-        if (inKnockback)
-        {
-            aiPath.canMove = false;
-            gun.GetComponent<SpriteRenderer>().enabled = false;
-            knockbackTimer -= Time.deltaTime;
-            if (knockbackTimer <= 0)
+            if (health <= 0)
             {
-                inKnockback = false;
-                anim.SetBool("knockback", false);
-                body.linearVelocity = Vector3.zero;
+                health = 0;
+                Death();
             }
+
+            if (inKnockback)
+            {
+                aiPath.canMove = false;
+                gun.GetComponent<SpriteRenderer>().enabled = false;
+                knockbackTimer -= Time.deltaTime;
+                if (knockbackTimer <= 0)
+                {
+                    inKnockback = false;
+                    anim.SetBool("knockback", false);
+                    body.linearVelocity = Vector3.zero;
+                }
+                else
+                {
+                    body.linearVelocity = knockbackDirection * (knockbackSpeed);
+                }
+            }
+
             else
             {
-                body.linearVelocity = knockbackDirection * (knockbackSpeed);
-            }
-        }
+                aiPath.canMove = true;
+                gun.GetComponent<SpriteRenderer>().enabled = true;
 
-        else
-        {
-            aiPath.canMove = true;
-            gun.GetComponent<SpriteRenderer>().enabled = true;
-            
-            //Flip Sprite
-            if (aiPath.desiredVelocity.x >= 0.01f)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
+                //Flip Sprite
+                if (aiPath.desiredVelocity.x >= 0.01f)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else if (aiPath.desiredVelocity.x <= 0.01f)
+                {
+                    transform.localScale = Vector3.one;
+                }
+                anim.SetBool("move", aiPath.desiredVelocity.x != 0 || aiPath.desiredVelocity.y != 0);
             }
-            else if (aiPath.desiredVelocity.x <= 0.01f)
-            {
-                transform.localScale = Vector3.one;
-            }
-            anim.SetBool("move", aiPath.desiredVelocity.x != 0 || aiPath.desiredVelocity.y != 0);
+            anim.SetBool("knockback", inKnockback);
         }
-        anim.SetBool("knockback", inKnockback);
     }
 
     //Method that rotates the arm in relation to the player
@@ -203,16 +215,72 @@ public class Enemy : MonoBehaviour
     //Method that shoots
     private void Shoot()
     {
-        
-        if (IsFacingRight())
+        if (!isDead)
         {
-            EnemyBullet newBullet = Instantiate(bullet, bulletSpawn.transform.position, arm.transform.rotation);
-        }
+            if (isBulletWave == false)
+            {
+                if (IsFacingRight())
+                {
+                    EnemyBullet newBullet = Instantiate(bullet, bulletSpawn.transform.position, arm.transform.rotation);
+                }
 
-        else if (!IsFacingRight())
-        {
-            EnemyBullet newBullet = Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(new Vector3(0,0,angle)));
+                else if (!IsFacingRight())
+                {
+                    EnemyBullet newBullet = Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+                }
+            }
+            else
+            {
+                if (IsFacingRight())
+                {
+                    EnemyBullet newBullet = Instantiate(waveBeam, bulletSpawn.transform.position, arm.transform.rotation);
+                }
+
+                else if (!IsFacingRight())
+                {
+                    EnemyBullet newBullet = Instantiate(waveBeam, bulletSpawn.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+                }
+            }
         }
+    }
+
+    private void GunLook()
+    {
+        if (isBulletWave)
+        {
+            gunAnim.SetBool("wave", true);
+        }
+        //else
+        //{
+        //    gunAnim.SetBool("wave", false);
+        //}
+    }
+
+    public void Death()
+    {
+        isDead = true;
+        aiPath.canMove = false;
+        gun.GetComponent<SpriteRenderer>().enabled = false;
+        boxCollider.enabled = false;
+        body.bodyType = RigidbodyType2D.Static;
+        collision.enabled = false;
+        anim.SetTrigger("death");
+        StartCoroutine(waiterDeath(1f));
+    }
+
+    IEnumerator waiterDeath(float duration)
+    {
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        Color startColor = renderer.color;
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0);
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            renderer.color = Color.Lerp(startColor, endColor, time / duration);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     //All trigger collision

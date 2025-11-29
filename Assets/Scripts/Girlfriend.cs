@@ -13,6 +13,8 @@ public class Girlfriend : MonoBehaviour
     public string[] text1;
 
     public Dialogue dialogue;
+    public GameManager manager;
+    public bool isCheering;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,9 +32,10 @@ public class Girlfriend : MonoBehaviour
 
     private void Movement()
     {
-        if (isTalking == false)
+        if (isTalking == false && isCheering == false)
         {
             anim.SetBool("talk", false);
+            manager.isTimerPaused = false;
             //Flip Sprite
             direction = player.transform.position - transform.position;
             //Debug.Log(direction);
@@ -52,6 +55,7 @@ public class Girlfriend : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    manager.isTimerPaused = true;
                     isTalking = true;
                     player.isTalking = true;
                     textIndicator.enabled = false;
@@ -64,10 +68,29 @@ public class Girlfriend : MonoBehaviour
             {
                 textIndicator.enabled = false;
             }
+
+            if (manager.inBattle == true)
+            {
+                isCheering = true;
+                anim.SetBool("cheer", true);
+            }
         }
+
+        //Makes girlfriend face left during cheer
+        if (isCheering)
+        {
+            transform.localScale = Vector3.one;
+        }
+
         else if (isTalking)
         {
             anim.SetBool("talk", true);
+        }
+
+        if (manager.inBattle == false)
+        {
+            isCheering = false;
+            anim.SetBool("cheer", false);
         }
     }
 }

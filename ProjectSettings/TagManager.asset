@@ -8,6 +8,7 @@ TagManager:
   - enemybullet
   - wavebeam
   - powerup
+  - badwavebeam
   layers:
   - Default
   - TransparentFX

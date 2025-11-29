@@ -4,7 +4,7 @@ public class PlayerCollision : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "enemybullet")
+        if (collision.tag == "enemybullet" || collision.tag == "badwavebeam")
         {
             int damage = collision.gameObject.GetComponent<EnemyBullet>().damage;
             GetComponentInParent<Player>().TakeDamage(damage);
