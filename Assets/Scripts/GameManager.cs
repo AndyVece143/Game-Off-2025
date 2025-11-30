@@ -11,11 +11,14 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
     public MusicManager music;
     public bool isTimerPaused;
+    public int rounds;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         peaceTimeMax = peaceTime;
         battleTimeMax = battleTime;
+        rounds = 0;
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
             if (battleTime <= 0)
             {
                 SwitchModes();
+                rounds++;
             }
         }
         else if (!inBattle && !isTimerPaused)
@@ -55,6 +59,7 @@ public class GameManager : MonoBehaviour
             int minutes = Mathf.FloorToInt(battleTime / 60);
             int seconds = Mathf.FloorToInt(battleTime % 60);
             timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
+            //timerText.color = new Color(255, 123, 123, 255);
             timerText.color = Color.red;
         }
         else if (!inBattle)
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
             int minutes = Mathf.FloorToInt(peaceTime / 60);
             int seconds = Mathf.FloorToInt(peaceTime % 60);
             timerText.text = string.Format("{0}:{1:00}", minutes, seconds);
-            timerText.color = Color.blue;
+            timerText.color = Color.white;
         }
     }
 }

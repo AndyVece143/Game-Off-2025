@@ -15,6 +15,6 @@ public class CanvasManager : MonoBehaviour
     void Update()
     {
         int seconds = (int)(player.bulletTimer % 60);
-        healthText.text = "Health: " + player.health;
+        healthText.text = "" + player.health;
     }
 }

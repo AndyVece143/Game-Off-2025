@@ -186,8 +186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 62.90257, y: -0.00079441}
-  m_SizeDelta: {x: 674.1989, y: 119.53}
+  m_AnchoredPosition: {x: 60.924023, y: -0.00031151}
+  m_SizeDelta: {x: 670.2418, y: 119.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3134020805801208495
 CanvasRenderer:
@@ -219,10 +219,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Big dialogue
 
+    d
+
+    d
+
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d48330d9e2fc213469da3c9ac3f75212, type: 2}
+  m_sharedMaterial: {fileID: -5907505336518197837, guid: d48330d9e2fc213469da3c9ac3f75212, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -246,8 +250,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -410,3 +414,5 @@ MonoBehaviour:
   - Gaming is cool
   - You should try it
   textSpeed: 0
+  player: {fileID: 0}
+  girlfriend: {fileID: 0}

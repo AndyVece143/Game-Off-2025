@@ -11,10 +11,12 @@ public class Girlfriend : MonoBehaviour
     private Vector3 direction;
     private float distance;
     public string[] text1;
+    public string[] text2;
 
     public Dialogue dialogue;
     public GameManager manager;
     public bool isCheering;
+    public Canvas canvas;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,6 +38,7 @@ public class Girlfriend : MonoBehaviour
         {
             anim.SetBool("talk", false);
             manager.isTimerPaused = false;
+            canvas.enabled = true;
             //Flip Sprite
             direction = player.transform.position - transform.position;
             //Debug.Log(direction);
@@ -59,8 +62,20 @@ public class Girlfriend : MonoBehaviour
                     isTalking = true;
                     player.isTalking = true;
                     textIndicator.enabled = false;
+                    canvas.enabled = false;
                     Dialogue newDialogue = Instantiate(dialogue);
-                    newDialogue.lines = text1;
+                    switch (manager.rounds)
+                    {
+                        case 0:
+                            newDialogue.lines = text1;
+                            break;
+
+                        case 1:
+                            newDialogue.lines = text2;
+                            break;
+                    }
+
+                    
                 }
 
             }
